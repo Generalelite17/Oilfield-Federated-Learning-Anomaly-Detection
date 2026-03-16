@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.pyc
+federated_learning/data/
+.DS_Store
+
+csv_data/*.csv
+outputs/*.csv
