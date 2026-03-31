@@ -32,8 +32,6 @@ The centralized baseline model uses structured network-flow telemetry data from 
 
 csv_data/BenignTraffic.pcap_Flow.csv
 
-For the federated learning simulation, the MNIST dataset is used to demonstrate distributed model training and aggregation across multiple simulated clients.
-
 ## Experimental Design
 
 This project evaluates anomaly detection performance using two approaches:
