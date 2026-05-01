@@ -5,7 +5,7 @@
 This project evaluates whether federated learning can effectively detect anomalies in distributed industrial automation networks compared to traditional centralized machine learning approaches.
 
 The system simulates geographically distributed oilfield automation nodes that locally train models and share updates with a central server using the Federated Averaging (FedAvg) algorithm. This work demonstrates the trade-off between centralized performance and real-world deployability in distributed industrial systems.
----
+
 
 ## Key Contributions
 
