@@ -1,88 +1,107 @@
 # Federated Learning for Anomaly Detection in Distributed Oilfield Automation Systems
 
-## Project Goal
+## Project Overview
 
-This project evaluates whether federated learning can effectively detect anomalies in distributed industrial automation networks compared to centralized machine learning models.
+This project evaluates whether federated learning can effectively detect anomalies in distributed industrial automation networks compared to traditional centralized machine learning approaches.
 
-The system simulates geographically distributed oilfield automation nodes that locally train anomaly detection models and share model updates with a central aggregation server to build a global detection model while preserving data locality.
+The system simulates geographically distributed oilfield automation nodes that locally train models and share updates with a central server using the Federated Averaging (FedAvg) algorithm. This work demonstrates the trade-off between centralized performance and real-world deployability in distributed industrial systems.
+---
 
-## Baseline Model
+## Key Contributions
 
-The baseline implementation uses a centralized anomaly detection approach.
-Network telemetry data is collected and processed on a single machine where
-an Isolation Forest model is trained to identify anomalous network behavior.
+- Implemented a **federated learning framework** using Flower
+- Simulated **non-IID distributed oilfield environments**
+- Compared **centralized vs federated anomaly detection performance**
+- Extended from **binary detection → multi-class intrusion detection**
 
-This centralized approach represents a traditional architecture commonly used
-in industrial monitoring systems where all telemetry is aggregated into a
-central analytics platform.
+---
 
-## Proposed Extension
-
-The proposed approach introduces a federated learning framework where multiple
-distributed automation nodes collaboratively train anomaly detection models
-without sharing raw network telemetry data.
-
-Each node performs local training on its own dataset partition and sends model
-updates to a central aggregation server. The server combines these updates
-using the Federated Averaging (FedAvg) algorithm to produce an improved
-global model.
 ## Dataset
 
-The centralized baseline model uses structured network-flow telemetry data from the dataset:
+This project uses the **CIC IoT-DIAD 2024 dataset** as a proof-of-concept for structured OT-like communication patterns.
 
-csv_data/BenignTraffic.pcap_Flow.csv
+### Attack Classes:
+- Modbus (Normal Traffic)
+- DDoS TCP SYN Flood
+- Port Scanning
+- SQL Injection
 
-## Experimental Design
+> Note: The dataset approximates industrial communication behavior but does not fully reflect real-world oilfield environments.
 
-This project evaluates anomaly detection performance using two approaches:
+---
 
-### Baseline: Centralized Training
+## Models
 
-In the baseline system, all network telemetry data is collected and processed on a centralized machine. The model is trained using the full dataset and performs anomaly detection on aggregated network traffic.
+### Centralized Model (Baseline)
+- Isolation Forest
+- Trained on fully aggregated dataset
+- Represents traditional industrial monitoring architecture
 
-Workflow:
+### Federated Learning Model (Proposed)
+- Neural Network (PyTorch)
+- Trained across 10 distributed clients
+- Aggregated using FedAvg
+- Supports non-IID data distribution
 
-Network Traffic Data
-        ↓
-Centralized Processing
-        ↓
-Isolation Forest Training
-        ↓
-Anomaly Detection
+---
 
-Advantages:
-- Simpler architecture
-- No communication overhead
-- Direct access to full dataset
+## Experimental Results
 
-Limitations:
-- Requires centralizing sensitive network data
-- Not scalable for distributed environments
+### Final Performance (Experiment 2)
 
-### Proposed Method: Federated Learning
+| Metric | Centralized Model | Federated Model |
+|-------|------------------|----------------|
+| Accuracy | 1.00 | 0.94 |
+| Precision | 1.00 | 0.91 |
+| Recall | 1.00 | 0.90 |
+| Macro F1-score | 1.00 | 0.90 |
 
-The proposed system distributes model training across multiple simulated nodes representing geographically distributed oilfield automation systems.
+---
 
-Each node trains a local model using its own dataset partition. Instead of sharing raw data, nodes send model updates to a central aggregation server. The server aggregates these updates using the Federated Averaging (FedAvg) algorithm to produce an updated global model.
+## Key Observations
 
-Workflow:
+- Federated learning achieves **strong performance without centralizing data**
+- Centralized model acts as an **upper-bound benchmark**
+- Non-IID data introduces realistic performance constraints
+- Model converges rapidly within early communication rounds
 
-Client 1 Dataset
-Client 2 Dataset
-Client 3 Dataset
-        ↓
-Local Training
-        ↓
-Server Aggregation (FedAvg)
-        ↓
-Global Model Update
+---
 
-### Baseline vs Proposed Comparison
+## Project Structure
+- federated_learning_model_nn/
+- centralized_model_nn/
+- baseline_isolation_forest/
 
-| Feature | Baseline Model | Federated Model |
-|-------|----------------|----------------|
-Training Architecture | Centralized | Distributed |
-Data Location | All data centralized | Data remains local |
-Privacy | Lower | Higher |
-Communication | None | Requires aggregation rounds |
-Scalability | Limited | Suitable for distributed systems |
+
+## How to Run
+
+1. Install dependencies  
+   pip install -r requirements.txt  
+
+2. Run federated learning simulation  
+   python federated_learning_model_nn/run_flower_simulation.py  
+
+3. Run centralized model  
+   python centralized_model_nn/train_centralized_nn.py  
+
+## Limitations
+- Dataset is not from real oilfield environments
+- Centralized model may overfit due to full data visibility
+- Limited number of clients (simulation)
+
+## Future Work
+- Increase number of clients
+- Evaluate additional attack types
+- Introduce statistical validation (multiple runs)
+- Explore trust-based aggregation methods
+
+## Author
+Emmanuel Cardenas
+University of Texas Permian Basin
+
+## Final Step
+Run these commands in your terminal:
+
+git add README.md
+git commit -m "Finalize README"
+git push origin main
