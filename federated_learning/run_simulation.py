@@ -4,8 +4,8 @@ from torchvision import datasets, transforms
 import csv
 
 from model import SimpleModel
-from client import train_local
-from server import average_weights
+from federated_learning.local_train import train_local
+from federated_learning.local_server import average_weights
 
 def split_dataset(dataset, num_clients=3):
     data_size = len(dataset) // num_clients

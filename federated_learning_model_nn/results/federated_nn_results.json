@@ -1,0 +1,44 @@
+{
+    "model": "Federated Neural Network",
+    "aggregation": "FedAvg",
+    "num_clients": 5,
+    "num_rounds": 3,
+    "dataset_info": {
+        "rows": 183630,
+        "features": 94,
+        "pseudo_label_distribution": {
+            "0": 181793,
+            "1": 1837
+        }
+    },
+    "round_results": [
+        {
+            "round": 0,
+            "accuracy": 0.8765452268147906,
+            "precision": 0.02550671828740606,
+            "recall": 0.30517711171662126,
+            "f1_score": 0.047078604455653636
+        },
+        {
+            "round": 1,
+            "accuracy": 0.9983390513532647,
+            "precision": 0.9421965317919075,
+            "recall": 0.888283378746594,
+            "f1_score": 0.9144460028050491
+        },
+        {
+            "round": 2,
+            "accuracy": 0.9986930240156837,
+            "precision": 0.920844327176781,
+            "recall": 0.9509536784741145,
+            "f1_score": 0.935656836461126
+        },
+        {
+            "round": 3,
+            "accuracy": 0.9990197680117627,
+            "precision": 0.9534246575342465,
+            "recall": 0.9482288828337875,
+            "f1_score": 0.9508196721311475
+        }
+    ]
+}

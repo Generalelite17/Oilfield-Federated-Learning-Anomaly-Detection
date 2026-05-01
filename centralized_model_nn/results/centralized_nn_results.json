@@ -1,0 +1,15 @@
+{
+    "model": "Centralized Neural Network",
+    "dataset": "..\\csv_data\\CIC\\BenignTraffic.pcap_Flow.csv",
+    "pseudo_label_method": "Isolation Forest",
+    "contamination": 0.01,
+    "accuracy": 0.9989925393454229,
+    "precision": 0.9365079365079365,
+    "recall": 0.9645776566757494,
+    "f1_score": 0.9503355704697987,
+    "rows": 183630,
+    "features": 94,
+    "epochs": 10,
+    "batch_size": 256,
+    "learning_rate": 0.001
+}
